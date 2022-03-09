@@ -1,6 +1,34 @@
-let library = document.getElementById("library");
-
+const library = document.getElementById("library");
+const newBookBtn = document.getElementById("newBookBtn");
+const newBookModal = document.getElementById("newBookModal");
+const modalCloseBtn = document.getElementById("modalCloseBtn");
+const addBookBtn = document.getElementById("addBookBtn");
+const newBookTitle = document.getElementById("bookTitle");
+const newBookAuthor = document.getElementById("bookAuthor");
+const newBookPages = document.getElementById("bookPages");
+const newBookRead = document.getElementById("bookRead");
 let libraryArray = [];
+
+newBookBtn.addEventListener("click", ()=>{
+    newBookModal.style.display = "flex";
+});
+
+modalCloseBtn.addEventListener("click", () =>{
+    newBookModal.style.display = "none";
+})
+
+window.onclick = function(event) {
+    if (event.target == newBookModal) {
+        newBookModal.style.display = "none";
+    }
+  }
+
+addBookBtn.addEventListener("click", addNewBook);
+
+function addNewBook(){
+    let book = new Book(newBookTitle.value, newBookAuthor.value, +newBookPages.value, newBookRead.checked);
+    book.addToLibrary();
+}
 
 class Book {
     constructor(title, author, pages, read) {
@@ -11,27 +39,25 @@ class Book {
     }
     addToLibrary() {
         libraryArray.push(this);
+        displayAllBooks();
     }
     changeRead() {
         this.read = !this.read;
+        displayAllBooks();
     }
 }
 
-let book1 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
-book1.addToLibrary();
+// let book1 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
+// book1.addToLibrary();
 
-let book2 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
-book2.addToLibrary();
-
-// let book3 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
-// book3.addToLibrary();
-
-console.log(libraryArray)
+// let book2 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
+// book2.addToLibrary();
 
 function displayAllBooks() {
+    library.innerHTML = "";
     libraryArray.forEach((book, index) => {
         let bookToBeAdded = document.createElement('div');
-        bookToBeAdded.id = 'book';
+        bookToBeAdded.id = `book${index}`;
         bookToBeAdded.className = 'book';
         bookToBeAdded.dataset.index = index;
 
@@ -57,10 +83,13 @@ function displayAllBooks() {
             else
                 read.textContent = 'not read yet';
             bookToBeAdded.appendChild(read);
+        
         library.appendChild(bookToBeAdded);
     });
 }
 
-// libraryArray.splice(2, 1); //delete at index 2 
 displayAllBooks();
+
+// libraryArray.splice(2, 1); //delete at index 2 
+
 
