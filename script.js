@@ -80,24 +80,6 @@ book1.addToLibrary();
 let book2 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
 book2.addToLibrary();
 
-let book3 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
-book1.addToLibrary();
-
-let book4 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
-book2.addToLibrary();
-
-let book5 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
-book1.addToLibrary();
-
-let book6 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
-book2.addToLibrary();
-
-let book7 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
-book1.addToLibrary();
-
-let book8 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
-book2.addToLibrary();
-
 function deleteBook(){
     libraryArray.splice(this.dataset.index, 1);
     displayAllBooks();
