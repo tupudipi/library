@@ -26,8 +26,35 @@ window.onclick = function(event) {
 addBookBtn.addEventListener("click", addNewBook);
 
 function addNewBook(){
-    let book = new Book(newBookTitle.value, newBookAuthor.value, +newBookPages.value, newBookRead.checked);
-    book.addToLibrary();
+    let OK=1;
+    if(!newBookTitle.value){
+        alert("Please enter a book title.");
+        newBookTitle.focus();
+        OK=0;
+    }
+    if(OK==1 && !newBookAuthor.value){
+        alert("Please enter a book author.");
+        newBookAuthor.focus();
+        OK=0;
+    }
+    if(OK==1 && !newBookPages.value){
+        alert("Please enter the length of the book, in pages.");
+        newBookPages.focus();
+        OK=0;
+    }
+    if(OK==1 && isNaN(newBookPages.value)){
+        alert("Please enter the number of pages as a integer.");
+        newBookPages.focus();
+        OK=0;
+    }
+    if(OK==1){
+        let book = new Book(newBookTitle.value, newBookAuthor.value, +newBookPages.value, newBookRead.checked);
+        book.addToLibrary();
+        newBookTitle.value = "";
+        newBookAuthor.value = "";
+        newBookPages.value = "";
+        newBookRead.value = false;
+    }
 }
 
 class Book {
@@ -47,11 +74,34 @@ class Book {
     }
 }
 
-// let book1 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
-// book1.addToLibrary();
+let book1 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
+book1.addToLibrary();
 
-// let book2 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
-// book2.addToLibrary();
+let book2 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
+book2.addToLibrary();
+
+let book3 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
+book1.addToLibrary();
+
+let book4 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
+book2.addToLibrary();
+
+let book5 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
+book1.addToLibrary();
+
+let book6 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
+book2.addToLibrary();
+
+let book7 = new Book('The Hobbit', 'JRR Tolkien', 310, false);
+book1.addToLibrary();
+
+let book8 = new Book('Slaughterhouse 5', 'Kurt Vonnegut', 192, true);
+book2.addToLibrary();
+
+function deleteBook(){
+    libraryArray.splice(this.dataset.index, 1);
+    displayAllBooks();
+}
 
 function displayAllBooks() {
     library.innerHTML = "";
@@ -62,27 +112,34 @@ function displayAllBooks() {
         bookToBeAdded.dataset.index = index;
 
         let title = document.createElement('p')
-            title.id = 'title';
+            title.className = `title`;
             title.textContent = book.title;
             bookToBeAdded.appendChild(title);
 
         let author = document.createElement('p')
-            author.id = 'author';
+            author.className = `author`;
             author.textContent = 'by ' + book.author;
             bookToBeAdded.appendChild(author);
 
         let pages = document.createElement('p')
-            pages.id = 'pages';
+            pages.className = `pages`;
             pages.textContent = book.pages + ' pages long';
             bookToBeAdded.appendChild(pages);
 
         let read = document.createElement('p')
-            read.id = 'read';
+            read.className = `read`;
             if (book.read)
                 read.textContent = 'read';
             else
                 read.textContent = 'not read yet';
             bookToBeAdded.appendChild(read);
+
+        let deleteBookBtn = document.createElement('button')
+            deleteBookBtn.className = `deleteBookBtn`;
+            deleteBookBtn.dataset.index = index;
+            deleteBookBtn.textContent = `Delete this book`;
+            deleteBookBtn.addEventListener("click", deleteBook);
+            bookToBeAdded.appendChild(deleteBookBtn);
         
         library.appendChild(bookToBeAdded);
     });
@@ -90,6 +147,6 @@ function displayAllBooks() {
 
 displayAllBooks();
 
-// libraryArray.splice(2, 1); //delete at index 2 
+
 
 

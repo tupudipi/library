@@ -1,15 +1,37 @@
 *{
     background-color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.book{
-    border: 2px solid black;
-    border-radius: 20px;
-    padding: 12px;
+#pageHeader{
+    text-align: center;
 }
 
 #newBookBtn{
+    all: unset;
+    padding: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
     margin-bottom: 16px;
+    cursor: pointer;
+}
+
+#library{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book{
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 12px;
+    margin: 8px;
+    min-width: 143px;
+}
+
+.book > *{
+    margin-top: 32px;
 }
 
 label{
@@ -35,7 +57,7 @@ margin-bottom: 16px;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
     display: none;
     z-index: 1;
 }
